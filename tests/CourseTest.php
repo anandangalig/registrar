@@ -82,6 +82,55 @@
             $this->assertEquals([], Course::getAll());
         }
 
+        function test_addStudent()
+        {
+            //ARRANGE
+            $name = "Defence Against the Dark Arts";
+            $id = null;
+            $number = "DADA101";
+            $test_course = new Course($id, $name, $number);
+            $test_course->save();
+
+            $name = "Harry Potter";
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
+
+            // Act
+            $test_course->addStudent($test_student);
+
+            // Assert
+            $this->assertEquals([$test_student], $test_course->getStudents());
+        }
+
+        function test_getStudents()
+        {
+            //ARRANGE
+            $name = "Defence Against the Dark Arts";
+            $id = null;
+            $number = "DADA101";
+            $test_course = new Course($id, $name, $number);
+            $test_course->save();
+
+            $name = "Harry Potter";
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
+            $test_course->addStudent($test_student);
+
+
+            $name2 = "Hermione Granger";
+            $test_student2 = new Student($id, $name2, $enrollment);
+            $test_student2->save();
+            $test_course->addStudent($test_student2);
+
+            // Act
+            $result = $test_course->getStudents();
+
+            // Assert
+            $this->assertEquals([$test_student, $test_student2], $result);
+        }
+
 
     }
 

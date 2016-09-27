@@ -18,7 +18,7 @@
         protected function tearDown()
         {
             Student::deleteAll();
-            //Course::deleteAll();
+            Course::deleteAll();
         }
 
         function testSave()
@@ -78,6 +78,55 @@
 
             // Assert
             $this->assertEquals([], Student::getAll());
+        }
+
+        function test_addCourse()
+        {
+            //ARRANGE
+            $name = "Defence Against the Dark Arts";
+            $id = null;
+            $number = "DADA101";
+            $test_course = new Course($id, $name, $number);
+            $test_course->save();
+
+            $name = "Harry Potter";
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
+
+            // Act
+            $test_student->addCourse($test_course);
+
+            // Assert
+            $this->assertEquals([$test_course], $test_student->getCourses());
+        }
+
+        function test_getCourses()
+        {
+            //ARRANGE
+            $id = null;
+            $name = "Harry Potter";
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
+
+            $name = "Defence Against the Dark Arts";
+            $number = "DADA101";
+            $test_course = new Course($id, $name, $number);
+            $test_course->save();
+            $test_student->addCourse($test_course);
+
+            $name2 = "Potions";
+            $number2 = "POT101";
+            $test_course2 = new Course($id, $name2, $number2);
+            $test_course2->save();
+            $test_student->addCourse($test_course2);
+
+            // Act
+            $result = $test_student->getCourses();
+
+            // Assert
+            $this->assertEquals([$test_course, $test_course2], $result);
         }
 
 

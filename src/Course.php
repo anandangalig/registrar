@@ -27,12 +27,32 @@
             return $this->number;
         }
 
-
-
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO courses (name, number) VALUES ('{$this->getName()}', '{$this->getNumber()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function addStudent($new_student)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO courses_students (course_id, student_id) VALUES ({$this->getId()}, {$new_student->getId()});");
+        }
+
+        function getStudents()
+        {
+            $returned_students = $GLOBALS['DB']->query("SELECT students.* FROM courses
+            JOIN courses_students ON (courses_students.course_id = courses.id)
+            JOIN students ON (students.id = courses_students.student_id)
+            WHERE courses.id = {$this->getId()};");
+            $students = array();
+            foreach ($returned_students as $student) {
+                $id = $student['id'];
+                $name = $student['name'];
+                $enrollment = $student['enrollment_date'];
+                $new_student = new Student($id, $name, $enrollment);
+                array_push($students, $new_student);
+            }
+            return $students;
         }
 
         static function getAll()
