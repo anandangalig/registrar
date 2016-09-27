@@ -21,23 +21,46 @@
     $app->get("/", function() use($app) {
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
+
+// STUDENTS
+
     $app->get("/create_student", function() use($app) {
-        $creating_student = true;
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
     $app->post("/create_student", function() use($app) {
-        $creating_student = false;
         $id = null;
         $new_student = new Student($id, $_POST['name'], $_POST['enrollment_date']);
         $new_student->save();
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
+    $app->get("/student/{id}", function($id) use($app) {
+        $student = Student::find($id);
+        return $app['twig']->render("student.html.twig", array('student' => $student, 'courses' => Course::getAll()));
+    });
+
+    $app->post("/student/{id}/add_course", function($id) use($app) {
+        $student = Student::find($id);
+        $course = Course::find($_POST['course_id']);
+        $student->addCourse($course);
+        return $app['twig']->render("student.html.twig", array('student' => $student, 'courses' => Course::getAll()));
+    });
+
+// COURSES
+
     $app->get("/create_course", function() use($app) {
-        $creating_course = true;
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
+    $app->get("/course/{id}", function($id) use($app) {
+        $course = Course::find($id);
+        return $app['twig']->render("course.html.twig", array('students' => Student::getAll(), 'course' => $course));
+    });
+    $app->post("/course/{id}/add_student", function($id) use($app) {
+        $course = Course::find($id);
+        $student = Student::find($_POST['student_id']);
+        $course->addStudent($student);
+        return $app['twig']->render("course.html.twig", array('students' => Student::getAll(), 'course' => $course));
+    });
     $app->post("/create_course", function() use($app) {
-        $creating_course = false;
         $id = null;
         $new_course = new Course($id, $_POST['name'], $_POST['number']);
         $new_course->save();

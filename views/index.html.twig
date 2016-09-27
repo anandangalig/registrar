@@ -19,9 +19,9 @@
                                 <input type="text" name="number" class="form-control">
                             </div>
                             <button type="submit" class="btn btn-primary">Create New Course</button>
-                        </form>
+                        </form><hr>
                         {% for course in courses %}
-                            <li>{{course.getNumber}}: {{course.getName}}</li>
+                            <li><a href="/course/{{course.getId}}">{{course.getNumber}}: {{course.getName}}</a></li>
                         {% endfor %}
                     </div>
                     <div class="col-sm-6">
@@ -34,9 +34,9 @@
                                 <input type="date" name="enrollment_date" class="form-control">
                             </div>
                             <button type="submit" class="btn btn-success">Create New Student</button>
-                        </form>
+                        </form><hr>
                         {% for student in students %}
-                            <li>{{student.getName}}: enrolled on {{student.getEnrollment}}</li>
+                            <li><a href="/student/{{student.getId}}">{{student.getName}}</a>: enrolled on {{student.getEnrollment}}</li>
                         {% endfor %}
                     </div>
                 </div>

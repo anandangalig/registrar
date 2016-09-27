@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>{{student.getName}}</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{student.getName}}</h1>
+        <h2>Current Courses:</h2>
+        <form action="/student/{{student.getId}}/add_course" method="post">
+            <div class="form-group">
+                <h3>Add a course:</h3>
+                <select name="course_id" class="form-control">
+                    {% for course in courses %}
+                        <option value="{{course.getId}}">{{course.getNumber}}: {{course.getName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add a Course</button>
+        </form><br>
+        <a type="button" href="/" class="btn btn-warning">Go Back to Main Page</a><hr>
+        {% for course in student.getCourses %}
+            <li>{{course.getNumber}}: {{course.getName}}</li>
+        {% endfor %}
+    </div>
+</body>
+</html>
