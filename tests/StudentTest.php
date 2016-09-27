@@ -18,7 +18,7 @@
         protected function tearDown()
         {
             Student::deleteAll();
-            Course::deleteAll();
+            //Course::deleteAll();
         }
 
         function testSave()
@@ -26,7 +26,7 @@
             //ARRANGE
             $name = "Harry Potter";
             $id = null;
-            $enrollment = 1991-09-01;
+            $enrollment = "1991-09-01";
             $test_student = new Student($id, $name, $enrollment);
 
             //ACT
@@ -43,13 +43,13 @@
             //ARRANGE
             $name = "Harry Potter";
             $id = null;
-            $enrollment = 1991-09-01;
+            $enrollment = "1991-09-01";
             $test_student = new Student($id, $name, $enrollment);
             $test_student->save();
 
             $name2 = "Hermione Granger";
             $id = null;
-            $enrollment = 1991-09-01;
+            $enrollment = "1991-09-01";
             $test_student2 = new Student($id, $name2, $enrollment);
             $test_student2->save();
 
@@ -58,9 +58,26 @@
 
             //ASSERT
             $this->assertEquals([$test_student, $test_student2], $result);
+        }
 
+        function testDeleteAll()
+        {
+            //ARRANGE
+            $name = "Harry Potter";
+            $id = null;
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
 
+            $name2 = "Hermione Granger";
+            $test_student2 = new Student($id, $name2, $enrollment);
+            $test_student2->save();
 
+            // Act
+            Student::deleteAll();
+
+            // Assert
+            $this->assertEquals([], Student::getAll());
         }
 
 
