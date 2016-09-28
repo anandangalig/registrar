@@ -148,26 +148,26 @@
 
         }
 
-        // function testDelete()
-        // {
-        //     //ARRANGE
-        //     $id = null;
-        //     $name = "Harry Potter";
-        //     $enrollment = "1991-09-01";
-        //     $test_student = new Student($id, $name, $enrollment);
-        //     $test_student->save();
-        //
-        //     $name2 = "Anand Angalig";
-        //     $enrollment2 = "1999-11-20";
-        //     $test_student2 = new Student($id, $name2, $enrollment2);
-        //     $test_student2->save();
-        //
-        //     //ACT
-        //     $test_student->delete();
-        //
-        //     //ASSERT
-        //     $this->assertEquals([$test_student2], Student::getAll());
-        // }
+        function testDelete()
+        {
+            //ARRANGE
+            $id = null;
+            $name = "Harry Potter";
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
+
+            $name2 = "Anand Angalig";
+            $enrollment2 = "1999-11-20";
+            $test_student2 = new Student($id, $name2, $enrollment2);
+            $test_student2->save();
+
+            //ACT
+            $test_student->delete();
+
+            //ASSERT
+            $this->assertEquals([$test_student2], Student::getAll());
+        }
 
         function testdeleteCourse()
         {

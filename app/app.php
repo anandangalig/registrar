@@ -54,6 +54,12 @@
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
 
+    $app->post("/delete_student/{id}", function($id) use ($app) {
+        $student = Student::find($id);
+        $student->delete();
+        return $app['twig']->render('index.html.twig', array('students' => Student::getAll(), 'courses' => Course::getAll()));
+    });
+
     $app->get("/students/{id}/edit", function($id) use ($app) {
         $student = Student::find($id);
         return $app['twig']->render('student_edit.html.twig', array('student' => $student));
@@ -101,6 +107,11 @@
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
 
+    $app->post("/delete_course/{id}", function($id) use ($app) {
+        $course = Course::find($id);
+        $course->delete();
+        return $app['twig']->render('index.html.twig', array('students' => Student::getAll(), 'courses' => Course::getAll()));
+    });
     $app->get("/courses/{id}/edit", function($id) use ($app) {
         $course = Course::find($id);
         return $app['twig']->render('course_edit.html.twig', array('course' => $course));

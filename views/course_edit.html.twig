@@ -13,8 +13,10 @@
                 <label for="new_course_name">Rename this Course:</label>
                 <input name="new_course_name" type="text" class="form-control"><br>
                 <button type="submit" class="btn btn-success">Update</button>
+            </form><hr>
+            <form action="/delete_course/{{course.getId}}" method="post">
+                <button type="submit" class="btn btn-danger">DELETE</button>
             </form>
         </div>
-
     </body>
 </html>

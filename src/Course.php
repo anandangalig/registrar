@@ -80,6 +80,11 @@
             $GLOBALS['DB']->exec("DELETE FROM courses;");
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+        }
+
         static function find($search_id)
         {
             $found_course = null;
