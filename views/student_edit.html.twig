@@ -3,15 +3,15 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <meta charset="utf-8">
-        <title>Update Course</title>
+        <title>Update Student</title>
     </head>
     <body>
         <div class="container">
-            <h1> Update the <em>{{course.getName}}</em> course:</h1>
-            <form action="/courses/{{course.getId}}" method="post">
+            <h1> Update Student Name: <em>{{student.getName}}</em></h1>
+            <form action="/students/{{student.getId}}" method="post">
                 <input name="_method" type="hidden" value="patch">
-                <label for="new_course_name">Rename this Course:</label>
-                <input name="new_course_name" type="text" class="form-control"><br>
+                <label for="new_student_name">Enter New Name:</label>
+                <input name="new_student_name" type="text" class="form-control"><br>
                 <button type="submit" class="btn btn-success">Update</button>
             </form>
         </div>

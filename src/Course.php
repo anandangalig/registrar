@@ -100,10 +100,9 @@
 
         }
 
-        function delete()
+        function deleteStudent($student_id)
         {
-            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
-
+            $GLOBALS['DB']->exec("DELETE FROM courses_students WHERE course_id = {$this->getId()} AND student_id = $student_id;");
         }
     }
  ?>

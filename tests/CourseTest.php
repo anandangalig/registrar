@@ -150,25 +150,49 @@
 
         }
 
-        function testDelete()
+        // function testDelete()
+        // {
+        //     //ARRANGE
+        //     $name = "Defence Against the Dark Arts";
+        //     $id = null;
+        //     $number = "DADA101";
+        //     $test_course = new Course($id, $name, $number);
+        //     $test_course->save();
+        //
+        //     $name2 = "History of Europe";
+        //     $number2 = "HIST103";
+        //     $test_course2 = new Course($id, $name2, $number2);
+        //     $test_course2->save();
+        //
+        //     //ACT
+        //     $test_course->delete();
+        //
+        //     //ASSERT
+        //     $this->assertEquals([$test_course2], Course::getAll());
+        // }
+
+        function testDeleteStudent()
         {
             //ARRANGE
-            $name = "Defence Against the Dark Arts";
             $id = null;
+            $name = "Harry Potter";
+            $enrollment = "1991-09-01";
+            $test_student = new Student($id, $name, $enrollment);
+            $test_student->save();
+
+            $name = "Defence Against the Dark Arts";
             $number = "DADA101";
             $test_course = new Course($id, $name, $number);
             $test_course->save();
 
-            $name2 = "History of Europe";
-            $number2 = "HIST103";
-            $test_course2 = new Course($id, $name2, $number2);
-            $test_course2->save();
+            $test_course->addStudent($test_student);
 
             //ACT
-            $test_course->delete();
+            $test_course->deleteStudent($test_student->getId());
 
             //ASSERT
-            $this->assertEquals([$test_course2], Course::getAll());
+            $this->assertEquals([], $test_course->getStudents());
+
         }
 
     }
