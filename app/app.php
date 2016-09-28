@@ -45,6 +45,10 @@
         return $app['twig']->render("student.html.twig", array('student' => $student, 'courses' => Course::getAll()));
     });
 
+    $app->post("/delete_all_students", function() use($app) {
+        Student::deleteAll();
+        return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
+    });
 // COURSES
 
     $app->get("/create_course", function() use($app) {
@@ -66,6 +70,13 @@
         $new_course->save();
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
+
+    $app->post("/delete_all_courses", function() use($app) {
+        Course::deleteAll();
+        return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
+    });
+
+
 
 
 

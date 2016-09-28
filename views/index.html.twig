@@ -22,7 +22,10 @@
                         </form><hr>
                         {% for course in courses %}
                             <li><a href="/course/{{course.getId}}">{{course.getNumber}}: {{course.getName}}</a></li>
-                        {% endfor %}
+                        {% endfor %}<br>
+                        <form action="/delete_all_courses" method="post">
+                            <button type="submit" class="btn btn-danger">DELETE ALL COURSES</button>
+                        </form>
                     </div>
                     <div class="col-sm-6">
                         <h2>Current Students:</h2>
@@ -37,7 +40,10 @@
                         </form><hr>
                         {% for student in students %}
                             <li><a href="/student/{{student.getId}}">{{student.getName}}</a>: enrolled on {{student.getEnrollment}}</li>
-                        {% endfor %}
+                        {% endfor %}<br>
+                        <form action="/delete_all_students" method="post">
+                            <button type="submit" class="btn btn-danger">DELETE ALL STUDENTS</button>
+                        </form>
                     </div>
                 </div>
 
