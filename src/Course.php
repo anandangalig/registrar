@@ -22,6 +22,11 @@
             return $this->name;
         }
 
+        function setName($new_name)
+        {
+            $this->name = $new_name;
+        }
+
         function getNumber()
         {
             return $this->number;
@@ -86,6 +91,19 @@
                 }
             }
             return $found_course;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE courses SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+
         }
     }
  ?>

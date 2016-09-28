@@ -131,6 +131,45 @@
             $this->assertEquals([$test_student, $test_student2], $result);
         }
 
+        function testUpdate()
+        {
+            //ARRANGE
+            $name = "History of Europe";
+            $id = null;
+            $number = "HIST103";
+            $test_course = new Course($id, $name, $number);
+            $test_course->save();
+
+            $new_name = "History of Asia";
+
+            //ACT
+            $test_course->update($new_name);
+
+            //ASSERT
+            $this->assertEquals("History of Asia", $test_course->getName());
+
+        }
+
+        function testDelete()
+        {
+            //ARRANGE
+            $name = "Defence Against the Dark Arts";
+            $id = null;
+            $number = "DADA101";
+            $test_course = new Course($id, $name, $number);
+            $test_course->save();
+
+            $name2 = "History of Europe";
+            $number2 = "HIST103";
+            $test_course2 = new Course($id, $name2, $number2);
+            $test_course2->save();
+
+            //ACT
+            $test_course->delete();
+
+            //ASSERT
+            $this->assertEquals([$test_course2], Course::getAll());
+        }
 
     }
 

@@ -7,8 +7,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>{{course.getName}}</h1>
-        <h2>Current Students:</h2>
+        <h1>{{course.getNumber}}: {{course.getName}}</h1>
         <form action="/course/{{course.getId}}/add_student" method="post">
             <div class="form-group">
                 <h3>Add a Student:</h3>
@@ -21,6 +20,7 @@
             <button type="submit" class="btn btn-primary">Enroll!</button>
         </form><br>
         <a type="button" href="/" class="btn btn-warning">Go Back to Main Page</a><hr>
+        <h2>Currently Enrolled Students:</h2>
         {% for student in course.getStudents %}
             <li>{{student.getName}}</li>
         {% endfor %}
