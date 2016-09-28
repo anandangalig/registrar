@@ -19,6 +19,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Enroll!</button>
         </form><br>
+        <p><a href="/courses/{{ course.getId }}/edit">Edit this Course</a></p>
         <a type="button" href="/" class="btn btn-warning">Go Back to Main Page</a><hr>
         <h2>Currently Enrolled Students:</h2>
         {% for student in course.getStudents %}

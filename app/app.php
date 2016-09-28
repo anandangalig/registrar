@@ -18,6 +18,10 @@
     $app->register(new Silex\Provider\TwigServiceProvider(), array ('twig.path' => __DIR__.'/../views'
     ));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
+
     $app->get("/", function() use($app) {
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
@@ -49,6 +53,7 @@
         Student::deleteAll();
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
     });
+
 // COURSES
 
     $app->get("/create_course", function() use($app) {
@@ -74,6 +79,18 @@
     $app->post("/delete_all_courses", function() use($app) {
         Course::deleteAll();
         return $app['twig']->render("index.html.twig", array('students' => Student::getAll(), 'courses' => Course::getAll()));
+    });
+
+    $app->get("/courses/{id}/edit", function($id) use ($app) {
+        $course = Course::find($id);
+        return $app['twig']->render('course_edit.html.twig', array('course' => $course));
+    });
+
+    $app->patch("/courses/{id}", function($id) use ($app) {
+        $new_name = $_POST['new_course_name'];
+        $course = Course::find($id);
+        $course->update($new_name);
+        return $app['twig']->render('course.html.twig', array('students' => Student::getAll(), 'course' => $course));
     });
 
 
