@@ -6,8 +6,8 @@
     <title>{{course.getName}}</title>
 </head>
 <body>
-    <div class="container">
-        <h1>{{course.getNumber}}: {{course.getName}}</h1>
+    <div class="jumbotron container">
+        <h2>{{course.getNumber}}: {{course.getName}}</h2>
         <form action="/course/{{course.getId}}/add_student" method="post">
             <div class="form-group">
                 <h3>Add a Student:</h3>
@@ -21,7 +21,7 @@
         </form><br>
         <a type="button" href="/courses/{{ course.getId }}/edit" class="btn btn-info">Edit this Course</a>
         <a type="button" href="/" class="btn btn-warning">Go Back to Main Page</a>
-        <h2>Currently Enrolled Students:</h2>
+        <h3>Currently Enrolled Students:</h3>
         {% for student in course.getStudents %}
             <ul>
                 <li>{{student.getName}}
